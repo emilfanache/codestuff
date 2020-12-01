@@ -124,17 +124,18 @@ void HashTable::DeleteBucket(unsigned long bucketIdx)
 {
     Node *bucketHead = hTable[bucketIdx];
     Node *prevNode = nullptr;
+
     if (!bucketHead)
         return;
 
     while (bucketHead != nullptr)
     {
-      prevNode = bucketHead;
-      bucketHead = bucketHead->_next;
-      if (prevNode)
-      {
-          delete prevNode;
-      }
+        prevNode = bucketHead;
+        bucketHead = bucketHead->_next;
+        if (prevNode)
+        {
+            delete prevNode;
+        }
     }
 }
 
@@ -149,12 +150,12 @@ void HashTable::DisplayBucket(unsigned long bucketIdx)
 
     while (bucketHead != nullptr)
     {
-      cout << "[" << bucketHead->_name << "]";
-      if (bucketHead->_next != nullptr)
-      {
-        cout << "->";
-      }
-      bucketHead = bucketHead->_next;
+        cout << "[" << bucketHead->_name << "]";
+        if (bucketHead->_next != nullptr)
+        {
+            cout << "->";
+        }
+        bucketHead = bucketHead->_next;
     }
     cout << endl;
 }
