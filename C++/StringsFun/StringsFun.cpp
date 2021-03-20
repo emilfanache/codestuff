@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -113,6 +115,30 @@ string GetGreatestCommonDivisor(string s1, string s2)
     return divisor;
 }
 
+std::string ReverseString(std::string inputText)
+{
+    std::vector<std::string> reverse;
+    std::istringstream ss(inputText);
+    std::string token;
+    std::string result;
+
+    if (inputText.empty())
+    {
+        return "empty";
+    }
+
+    while(std::getline(ss, token, ' ')) {
+        reverse.push_back(token);
+    }
+
+    for (int i = reverse.size() - 1; i >= 0; i--)
+    {
+        result += reverse[i];
+        if (i > 0)
+            result += ' ';
+    }
+    return result;
+}
 
 int main()
 {
@@ -123,14 +149,14 @@ int main()
     cout << "=== Shift Test 1 ===" << endl;
     s = "abcde";
     result = shiftString(s, 4, 2);
-    cout << "result=" << result << endl;
+    cout << "result=" << result << endl << endl;
     check = shiftBothStrings(s, 4, 2);
     cout << "Double check result: " << check << endl << endl;
 
     cout << "=== Shift Test 2 ===" << endl;
     s = "abcde";
     shiftString(s, 20, 26);
-    cout << "result=" << result << endl;
+    cout << "result=" << result << endl << endl;
     check = shiftBothStrings(s, 20, 26);
     cout << "Double check result: " << check << endl << endl;
 
@@ -139,7 +165,7 @@ int main()
     string s2 = "abcabcabcabcabc";
     string divisor = GetGreatestCommonDivisor(s1, s2);
     if (divisor.empty())
-        cout << "There is no divisor" << endl;
+        cout << "There is no divisor" << endl << endl;
     else
         cout << "The divisor is \"" <<  divisor.c_str() << "\" with size " << divisor.length() << endl << endl;
 
@@ -148,7 +174,7 @@ int main()
     s2 = "11111";
     divisor = GetGreatestCommonDivisor(s1, s2);
     if (divisor.empty())
-        cout << "There is no divisor" << endl;
+        cout << "There is no divisor" << endl << endl;
     else
         cout << "The divisor is \"" <<  divisor.c_str() << "\" with size " << divisor.length() << endl << endl;
 
@@ -157,8 +183,16 @@ int main()
     s2 = "abhkhkh";
     divisor = GetGreatestCommonDivisor(s1, s2);
     if (divisor.empty())
-        cout << "There is no divisor" << endl;
+        cout << "There is no divisor" << endl << endl;
     else
         cout << "The divisor is \"" <<  divisor.c_str() << "\" with size " << divisor.length() << endl << endl;
+
+
+    cout << "=== Reverse words in a phrase Test 1 ===" << endl;
+    std::string inputString("lorem ipsum dolor sit amet");
+    std::cout << "Initial string: "  << inputString << std::endl;
+    std::string outputString = ReverseString(inputString);
+    std::cout << "After reverse: "  << outputString << std::endl;
+
     return 0;
 }
