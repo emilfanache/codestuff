@@ -12,17 +12,18 @@
 
 using namespace std;
 
+template <typename T>
 struct Node
 {
     Node*   _next;
-    int     _data;
+    T       _data;
 };
 
-
+template <class T>
 class SingleLinkedList
 {
 private:
-    Node* head;
+    Node<T>* head;
     bool debug;
 
 public:
@@ -31,9 +32,9 @@ public:
     ~SingleLinkedList();
     void PrintList(string description);
     void ReverseList();
-    void AddNode(int data);
-    void AddNode(int dataToFind, int dataToAdd);
-    void DeleteNode(int data);
+    void AddNode(T data);
+    void AddNode(T dataToFind, T dataToAdd);
+    void DeleteNode(T data);
 };
 
 

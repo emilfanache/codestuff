@@ -3,22 +3,24 @@
 
 using namespace std;
 
-
-SingleLinkedList::SingleLinkedList()
+template <class T>
+SingleLinkedList<T>::SingleLinkedList()
 {
     head = nullptr;
     debug = false;
 }
 
-SingleLinkedList::SingleLinkedList(bool dbg)
+template <class T>
+SingleLinkedList<T>::SingleLinkedList(bool dbg)
 {
     head = nullptr;
     debug = dbg;
 }
 
-void SingleLinkedList::AddNode(int data)
+template <class T>
+void SingleLinkedList<T>::AddNode(T data)
 {
-    Node *n = new Node;
+    Node<T> *n = new Node<T>;
     n->_data = data;
     n->_next = nullptr;
 
@@ -28,7 +30,7 @@ void SingleLinkedList::AddNode(int data)
     }
     else
     {
-        Node *current;
+        Node<T> *current;
 
         // this should take me to the end of the list
         for (current = head; current->_next != nullptr; current = current->_next);
@@ -42,7 +44,8 @@ void SingleLinkedList::AddNode(int data)
   return;
 }
 
-void SingleLinkedList::AddNode(int dataToFind, int dataToAdd)
+template <class T>
+void SingleLinkedList<T>::AddNode(T dataToFind, T dataToAdd)
 {
     if (!head)
     {
@@ -50,7 +53,7 @@ void SingleLinkedList::AddNode(int dataToFind, int dataToAdd)
     }
     else
     {
-        Node *current = head;
+        Node<T> *current = head;
         bool foundData = false;
 
         while (current->_next != nullptr)
@@ -73,7 +76,7 @@ void SingleLinkedList::AddNode(int dataToFind, int dataToAdd)
         }
         else
         {
-            Node *n = new Node;
+            Node<T> *n = new Node<T>;
             n->_data = dataToAdd;
             n->_next = current->_next;
             current->_next = n;
@@ -83,7 +86,8 @@ void SingleLinkedList::AddNode(int dataToFind, int dataToAdd)
     return;
 }
 
-void SingleLinkedList::DeleteNode(int data)
+template <class T>
+void SingleLinkedList<T>::DeleteNode(T data)
 {
     if (!head)
     {
@@ -91,15 +95,15 @@ void SingleLinkedList::DeleteNode(int data)
     }
     else if (head->_data == data)
     {
-        Node *previous = head;
+        Node<T> *previous = head;
         head = head->_next;
         delete previous;
         return;
     }
     else
     {
-        Node *current = head;
-        Node *previous;
+        Node<T> *current = head;
+        Node<T> *previous;
         bool foundData = false;
 
         while (current != nullptr)
@@ -123,11 +127,12 @@ void SingleLinkedList::DeleteNode(int data)
     return;
 }
 
-void SingleLinkedList::ReverseList()
+template <class T>
+void SingleLinkedList<T>::ReverseList()
 {
-    Node *current = head;
-    Node *previous = nullptr;
-    Node *next = nullptr;
+    Node<T> *current = head;
+    Node<T> *previous = nullptr;
+    Node<T> *next = nullptr;
 
     while (current != nullptr)
     {
@@ -140,14 +145,15 @@ void SingleLinkedList::ReverseList()
     head = previous;
 }
 
-void SingleLinkedList::PrintList(string description)
+template <class T>
+void SingleLinkedList<T>::PrintList(string description)
 {
     if (!description.empty())
     {
         cout << "====== " << description.c_str() << " ======" << endl;
     }
 
-    for (Node * current = head; current != nullptr; current = current->_next)
+    for (Node<T> * current = head; current != nullptr; current = current->_next)
     {
         cout << "[" << current->_data << "]";
         if (current->_next != nullptr)
@@ -159,10 +165,11 @@ void SingleLinkedList::PrintList(string description)
     cout << endl;
 }
 
-SingleLinkedList::~SingleLinkedList()
+template <class T>
+SingleLinkedList<T>::~SingleLinkedList()
 {
-    Node *next = nullptr;
-    Node *current = head;
+    Node<T> *next = nullptr;
+    Node<T> *current = head;
 
     while (current != nullptr)
     {
@@ -178,4 +185,12 @@ SingleLinkedList::~SingleLinkedList()
     head = nullptr;
 }
 
-
+/* !!! Important !!!
+ *
+ * Added the template class types declarations so I
+ * can use the specialized types without including
+ * the whole implementation into the header file
+ * which is the other way of doing this
+ */
+template class SingleLinkedList<int>;
+template class SingleLinkedList<string>;
