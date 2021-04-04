@@ -12,11 +12,11 @@
 
 using namespace std;
 
-typedef struct Node_t
+struct Node
 {
-    Node_t*   _next;
+    Node*   _next;
     string    _name;
-} Node;
+};
 
 const unsigned long numberOfBuckets = 20;
 
