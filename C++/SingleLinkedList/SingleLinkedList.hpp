@@ -12,28 +12,28 @@
 
 using namespace std;
 
-typedef struct Node_t
+struct Node
 {
-  Node_t*   _next;
-  int       _data;
-} Node;
+    Node*   _next;
+    int     _data;
+};
 
 
 class SingleLinkedList
 {
 private:
-  Node* head;
-  bool debug;
+    Node* head;
+    bool debug;
 
 public:
-  SingleLinkedList();
-  SingleLinkedList(bool dbg);
-  ~SingleLinkedList();
-  void PrintList(string description);
-  void ReverseList();
-  void AddEndNode(int data);
-  void AddInsideNode(int dataToFind, int dataToAdd);
-  void DeleteNode(int data);
+    SingleLinkedList();
+    SingleLinkedList(bool dbg);
+    ~SingleLinkedList();
+    void PrintList(string description);
+    void ReverseList();
+    void AddNode(int data);
+    void AddNode(int dataToFind, int dataToAdd);
+    void DeleteNode(int data);
 };
 
 
