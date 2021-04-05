@@ -29,10 +29,13 @@ int main()
     leaf =  bTree.AddNode(11, leaf);
     leaf =  bTree.AddNode(6, leaf);
 
+    cout << "Max Depth: " << bTree.GetMaxDepth() << endl;
+
     cout << "=====   Print binary trees:   =====" << endl;
     bTree.PrintBTree(TPInOrder);
     bTree.PrintBTree(TPPreOrder);
     bTree.PrintBTree(TPPostOrder);
+    bTree.PrintBTree(TPByLevel);
 
     cout << "=====   Mirror binary tree:   =====" << endl;
     SortedBinaryTree copyBeforeMirror = bTree;

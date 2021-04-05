@@ -12,7 +12,8 @@ enum TreePrintOrder
 {
     TPInOrder,
     TPPreOrder,
-    TPPostOrder
+    TPPostOrder,
+    TPByLevel
 };
 
 struct Node
@@ -32,10 +33,14 @@ class  SortedBinaryTree
     void PrintInOrder(Node *leaf);
     void PrintPreOrder(Node *leaf);
     void PrintPostOrder(Node *leaf);
+    void PrintByLevel(Node *leaf, int level);
+    int MaxDepth(Node *leaf);
     void MirrorBTreeHelper(Node *leaf);
     Node* CopyBinaryTree(Node *srcTree);
     Node* GetBTreeRoot() const;
     bool TwinTrees(Node *srcTree, Node *dstTree);
+    void PrintByLevel(Node *leaf);
+    void PrintOneLevel(Node *leaf, int level);
 
   public:
     SortedBinaryTree();
@@ -46,6 +51,8 @@ class  SortedBinaryTree
     void PrintBTree(TreePrintOrder order);
     void PrintBTree();
     void MirrorBTree();
+    int GetMaxDepth();
+    void PrintByLevel();
     friend bool IdenticalTrees(SortedBinaryTree &, SortedBinaryTree &);
 
 };

@@ -169,6 +169,44 @@ void  SortedBinaryTree::PrintPostOrder(Node *leaf)
     cout << leaf->_value << " ";
 }
 
+void SortedBinaryTree::PrintOneLevel(Node *leaf, int level)
+{
+    if (!leaf || !level)
+    {
+        return;
+    }
+
+    if (level == 1)
+    {
+        cout << leaf->_value << " ";
+    }
+    else
+    {
+        PrintOneLevel(leaf->_left, level - 1);
+        PrintOneLevel(leaf->_right, level - 1);
+    }
+}
+
+void SortedBinaryTree::PrintByLevel(Node *leaf)
+{
+    if (!leaf)
+    {
+        return;
+    }
+
+    unsigned int maxDepth = GetMaxDepth();
+    for (unsigned int i = 1; i <= maxDepth; i++)
+    {
+        PrintOneLevel(leaf, i);
+        cout << endl;
+    }
+}
+
+void SortedBinaryTree::PrintByLevel()
+{
+    PrintByLevel(root);
+}
+
 void  SortedBinaryTree::PrintBTree(TreePrintOrder order)
 {
     switch (order)
@@ -186,6 +224,11 @@ void  SortedBinaryTree::PrintBTree(TreePrintOrder order)
         case TPPostOrder:
             cout << "Print Binary tree method: PostOrder" << endl;
             PrintPostOrder(root);
+        break;
+
+        case TPByLevel:
+            cout << "Print Binary tree method: By Level" << endl;
+            PrintByLevel();
         break;
 
         default:
@@ -246,6 +289,33 @@ bool SortedBinaryTree::TwinTrees(Node *srcTree, Node *dstTree)
     return false;
 }
 
+int SortedBinaryTree::MaxDepth(Node *leaf)
+{
+    unsigned int lDepth = 0;
+    unsigned int rDepth = 0;
+
+    if (!leaf)
+    {
+        return 0;
+    }
+
+    if (leaf->_left)
+    {
+        lDepth += 1+ MaxDepth(leaf->_left);
+    }
+
+    if (leaf->_right)
+    {
+        rDepth += 1+ MaxDepth(leaf->_right);
+    }
+
+    return (lDepth > rDepth ? lDepth : rDepth);
+}
+
+int SortedBinaryTree::GetMaxDepth()
+{
+    return MaxDepth(root);
+}
 
 bool IdenticalTrees(SortedBinaryTree &srcTree, SortedBinaryTree &dstTree)
 {
