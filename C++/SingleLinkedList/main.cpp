@@ -41,6 +41,8 @@ int main()
     SlistStr.AddNode("ten");
     SlistStr.AddNode("fourteen");
     SlistStr.PrintList("Initial creation by adding end nodes");
+    SlistStr.Swap("eight", "ten");
+    SlistStr.PrintList("After swapping nodes");
     SlistStr.ReverseList();
     SlistStr.PrintList("After reversing list");
 

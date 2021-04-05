@@ -26,6 +26,8 @@ private:
     Node<T>* head;
     bool debug;
 
+    void SwapNodes(Node<T>** firstNode, Node<T>** secondNode);
+
 public:
     SingleLinkedList();
     SingleLinkedList(bool dbg);
@@ -34,6 +36,7 @@ public:
     void ReverseList();
     void AddNode(T data);
     void AddNode(T dataToFind, T dataToAdd);
+    void Swap(T first, T second);
     void DeleteNode(T data);
 };
 

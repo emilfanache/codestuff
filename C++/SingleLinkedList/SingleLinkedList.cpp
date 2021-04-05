@@ -146,11 +146,74 @@ void SingleLinkedList<T>::ReverseList()
 }
 
 template <class T>
+void SingleLinkedList<T>::SwapNodes(Node<T> **firstNode, Node<T> **secondNode)
+{
+    Node<T> *localNode = *firstNode;
+    *firstNode = *secondNode;
+    *secondNode = localNode;
+}
+
+template <class T>
+void SingleLinkedList<T>::Swap(T first, T second)
+{
+    Node<T> *current = head;
+    Node<T> *previous = nullptr;
+    Node<T> *firstNode = nullptr;
+    Node<T> *previousFirst = nullptr;
+    Node<T> *secondNode = nullptr;
+    Node<T> *previousSecond = nullptr;
+
+    while (current != nullptr)
+    {
+        if (current->_data == first)
+        {
+            firstNode = current;
+            previousFirst = previous;
+        }
+        else if (current->_data == second)
+        {
+            secondNode = current;
+            previousSecond = previous;
+        }
+
+        // if we found both nodes no need to iterate further
+        if (firstNode && secondNode)
+            break;
+
+        previous = current;
+        current = current->_next;
+    }
+
+    if (!firstNode || !secondNode)
+        return;
+
+    if (previousFirst != nullptr)
+    {
+        previousFirst->_next = secondNode;
+    }
+    else
+    {
+        head = secondNode;
+    }
+
+    if (previousSecond != nullptr)
+    {
+        previousSecond->_next = firstNode;
+    }
+    else
+    {
+        head = firstNode;
+    }
+
+    SwapNodes(&firstNode->_next, &secondNode->_next);
+}
+
+template <class T>
 void SingleLinkedList<T>::PrintList(string description)
 {
     if (!description.empty())
     {
-        cout << "====== " << description.c_str() << " ======" << endl;
+        cout << description.c_str() << ":" << endl;
     }
 
     for (Node<T> * current = head; current != nullptr; current = current->_next)
@@ -162,7 +225,7 @@ void SingleLinkedList<T>::PrintList(string description)
         }
     }
 
-    cout << endl;
+    cout << endl << endl;
 }
 
 template <class T>
