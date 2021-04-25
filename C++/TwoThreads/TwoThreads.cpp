@@ -37,7 +37,7 @@ void* theOneHandler(void *arg)
 {
     int argId = *((int*)arg);
 
-    cout << "theOne started -> tid = " << argId << endl;
+    cout << "theOne started . tid = " << argId << endl;
 
     pthread_mutex_lock(&m_lock);
 
@@ -53,7 +53,7 @@ void* theOneHandler(void *arg)
 void* theOtherHandler(void *arg)
 {
     int argId = *((int*)arg);
-    cout << "theOther started -> tid = " << argId << endl;
+    cout << "theOther started . tid = " << argId << endl;
 
     pthread_mutex_lock(&m_lock);
 
@@ -90,6 +90,7 @@ int main()
     status = pthread_create(&theOne, NULL, theOneHandler, (void *)&theOneId);
     if (status > 0)
     {
+        delete [] buffer;
         cout << "Error "<< status << "on creating thread: theOne" << status << endl;
         exit(-1);
     }
@@ -100,6 +101,7 @@ int main()
     status = pthread_create(&theOther, NULL, theOtherHandler, (void *)&theOtherId);
     if (status > 0)
     {
+        delete [] buffer;
         cout << "Error "<< status << "on creating thread: theOther" << status << endl;
         exit(-1);
     }
@@ -109,6 +111,7 @@ int main()
     status = pthread_join(theOne, NULL);
     if (status != 0)
     {
+        delete [] buffer;
         cout << "Error "<< status << "on joining thread: theOne" << status << endl;
         exit(-1);
     }
@@ -116,6 +119,7 @@ int main()
     status = pthread_join(theOther, NULL);
     if (status != 0)
     {
+        delete [] buffer;
         cout << "Error "<< status << "on joining thread: theOther" << status << endl;
         exit(-1);
     }
@@ -124,6 +128,7 @@ int main()
 
     // terminate current thread but keep all the other going
     pthread_exit(NULL);
+    delete [] buffer;
 
     return 0;
 }
