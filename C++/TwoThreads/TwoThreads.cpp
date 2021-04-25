@@ -37,7 +37,7 @@ void* theOneHandler(void *arg)
 {
     int argId = *((int*)arg);
 
-    cout << "theOne started . tid = " << argId << endl;
+    cout << "theOne started -> tid = " << argId << endl;
 
     pthread_mutex_lock(&m_lock);
 
@@ -53,7 +53,7 @@ void* theOneHandler(void *arg)
 void* theOtherHandler(void *arg)
 {
     int argId = *((int*)arg);
-    cout << "theOther started . tid = " << argId << endl;
+    cout << "theOther started -> tid = " << argId << endl;
 
     pthread_mutex_lock(&m_lock);
 
