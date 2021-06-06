@@ -131,12 +131,17 @@ int main()
         i++;
     }
 
-    PrintData(data);
+    // pick the number to search in the vector
     needle = PickNeedle(num, ratio, first);
+
+    // print and test data and implementation
+    PrintData(data);
+
     cout << "I picked needle: " << needle << endl;
     cout << "Index found with binary search non recursively is: ";
     cout << BinarySearchNonRecursive(data, needle) << endl;
     cout << "Index found with binary search recursively is: ";
     cout << BinarySearchRecursive(data, needle, 0, data.size() - 1);
+
     return 0;
 }
