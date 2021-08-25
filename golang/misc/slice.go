@@ -10,32 +10,32 @@
 package main
 
 import (
-	"fmt"
-	"sort"
-	"strconv"
+    "fmt"
+    "sort"
+    "strconv"
 )
 
 func main() {
-	var inputVal string
-	sl := make([]int, 3)
+    var inputVal string
+    sl := make([]int, 3)
 
-	for {
-		fmt.Print("Please insert value: ")
-		fmt.Scan(&inputVal)
-		if inputVal == "X" {
-			fmt.Println("Exiting...")
-			break
-		}
+    for {
+        fmt.Print("Please insert value: ")
+        fmt.Scan(&inputVal)
+        if inputVal == "X" {
+            fmt.Println("Exiting...")
+            break
+        }
 
-		integerInput, err := strconv.Atoi(inputVal)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
+        integerInput, err := strconv.Atoi(inputVal)
+        if err != nil {
+            fmt.Println(err)
+            continue
+        }
 
-		sl = append(sl, integerInput)
-		sort.Ints(sl)
-		fmt.Printf("%v\n", sl)
-	}
+        sl = append(sl, integerInput)
+        sort.Ints(sl)
+        fmt.Printf("%v\n", sl)
+    }
 
 }
