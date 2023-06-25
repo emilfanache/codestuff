@@ -5,11 +5,9 @@
  *      Author: Emil Fanache
  */
 
-#include "HashTable.hpp"
+#include "HashTable/HashTable.hpp"
 
-
-int main()
-{
+int main() {
     HashTable ht;
 
     ht.AddName("Sam");
@@ -27,8 +25,6 @@ int main()
         cout << "The name Emil exists in the hash table!" << endl;
     else
         cout << "The name Emil doesn't exist in the hash table!" << endl;
-
-
 
     return 0;
 }

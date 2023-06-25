@@ -4,55 +4,44 @@
  *  Created on: Mar. 21, 2021
  *      Author: Emil Fanache
  */
-
-#include "SortedBinaryTree.hpp"
-
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
-using namespace std;
+#include "SortedBinaryTree/SortedBinaryTree.hpp"
 
-SortedBinaryTree::SortedBinaryTree()
-{
+SortedBinaryTree::SortedBinaryTree() {
     root = nullptr;
 }
 
-SortedBinaryTree::SortedBinaryTree(const SortedBinaryTree& srcTree)
-{
+SortedBinaryTree::SortedBinaryTree(const SortedBinaryTree& srcTree) {
     root = CopyBinaryTree(srcTree.GetBTreeRoot());
 }
 
-Node *SortedBinaryTree::CopyBinaryTree(Node *srcTree)
-{
-    Node *dstTree = nullptr;
+Node* SortedBinaryTree::CopyBinaryTree(Node* srcTree) {
+    Node* dstTree = nullptr;
 
-    if (!srcTree)
-    {
+    if (!srcTree) {
         return nullptr;
     }
 
     dstTree = CreateNode(srcTree->_value);
-    if (srcTree->_left != nullptr)
-    {
+    if (srcTree->_left != nullptr) {
         dstTree->_left = CopyBinaryTree(srcTree->_left);
     }
 
-    if (srcTree->_right != nullptr)
-    {
+    if (srcTree->_right != nullptr) {
         dstTree->_right = CopyBinaryTree(srcTree->_right);
     }
 
     return dstTree;
 }
 
-SortedBinaryTree::~ SortedBinaryTree()
-{
+SortedBinaryTree::~SortedBinaryTree() {
     DeleteTree(root);
 }
 
-Node * SortedBinaryTree::CreateNode(int value)
-{
-    Node *leaf = new Node;
+Node* SortedBinaryTree::CreateNode(int value) {
+    Node* leaf = new Node;
     leaf->_value = value;
     leaf->_left = nullptr;
     leaf->_right = nullptr;
@@ -60,38 +49,26 @@ Node * SortedBinaryTree::CreateNode(int value)
     return leaf;
 }
 
-Node* SortedBinaryTree::AddNode(int value, Node *leaf)
-{
-    if (!root)
-    {
+Node* SortedBinaryTree::AddNode(int value, Node* leaf) {
+    if (!root) {
         root = CreateNode(value);
         return root;
     }
 
-    if (!leaf)
-    {
+    if (!leaf) {
         return nullptr;
     }
 
-    if (value < leaf->_value)
-    {
-        if (leaf->_left != nullptr)
-        {
+    if (value < leaf->_value) {
+        if (leaf->_left != nullptr) {
             AddNode(value, leaf->_left);
-        }
-        else
-        {
+        } else {
             leaf->_left = CreateNode(value);
         }
-    }
-    else
-    {
-        if (leaf->_right != nullptr)
-        {
+    } else {
+        if (leaf->_right != nullptr) {
             AddNode(value, leaf->_right);
-        }
-        else
-        {
+        } else {
             leaf->_right = CreateNode(value);
         }
     }
@@ -99,29 +76,21 @@ Node* SortedBinaryTree::AddNode(int value, Node *leaf)
     return leaf;
 }
 
-Node*  SortedBinaryTree::FindNode(int value, Node *leaf)
-{
-    if (!root || !leaf)
-    {
+Node* SortedBinaryTree::FindNode(int value, Node* leaf) {
+    if (!root || !leaf) {
         return nullptr;
     }
 
-    if (value == leaf->_value)
-    {
+    if (value == leaf->_value) {
         return leaf;
-    }
-    else if (value < leaf->_value)
-    {
+    } else if (value < leaf->_value) {
         return FindNode(value, leaf->_left);
-    }
-    else
-    {
+    } else {
         return FindNode(value, leaf->_right);
     }
 }
 
-void  SortedBinaryTree::DeleteTree(Node *leaf)
-{
+void SortedBinaryTree::DeleteTree(Node* leaf) {
     if (!leaf)
         return;
 
@@ -131,25 +100,23 @@ void  SortedBinaryTree::DeleteTree(Node *leaf)
 }
 
 // Left - Root - Right
-void  SortedBinaryTree::PrintInOrder(Node *leaf)
-{
+void SortedBinaryTree::PrintInOrder(Node* leaf) {
     if (!leaf)
         return;
 
     PrintInOrder(leaf->_left);
 
-    cout << leaf->_value << " ";
+    std::cout << leaf->_value << " ";
 
     PrintInOrder(leaf->_right);
 }
 
 // Root - Left - Right
-void  SortedBinaryTree::PrintPreOrder(Node *leaf)
-{
+void SortedBinaryTree::PrintPreOrder(Node* leaf) {
     if (!leaf)
         return;
 
-    cout << leaf->_value << " ";
+    std::cout << leaf->_value << " ";
 
     PrintInOrder(leaf->_left);
 
@@ -157,8 +124,7 @@ void  SortedBinaryTree::PrintPreOrder(Node *leaf)
 }
 
 // Left - Right - Root
-void  SortedBinaryTree::PrintPostOrder(Node *leaf)
-{
+void SortedBinaryTree::PrintPostOrder(Node* leaf) {
     if (!leaf)
         return;
 
@@ -166,90 +132,76 @@ void  SortedBinaryTree::PrintPostOrder(Node *leaf)
 
     PrintInOrder(leaf->_right);
 
-    cout << leaf->_value << " ";
+    std::cout << leaf->_value << " ";
 }
 
-void SortedBinaryTree::PrintOneLevel(Node *leaf, int level)
-{
-    if (!leaf || !level)
-    {
+void SortedBinaryTree::PrintOneLevel(Node* leaf, int level) {
+    if (!leaf || !level) {
         return;
     }
 
-    if (level == 1)
-    {
-        cout << leaf->_value << " ";
-    }
-    else
-    {
+    if (level == 1) {
+        std::scout << leaf->_value << " ";
+    } else {
         PrintOneLevel(leaf->_left, level - 1);
         PrintOneLevel(leaf->_right, level - 1);
     }
 }
 
-void SortedBinaryTree::PrintByLevel(Node *leaf)
-{
-    if (!leaf)
-    {
+void SortedBinaryTree::PrintByLevel(Node* leaf) {
+    if (!leaf) {
         return;
     }
 
     unsigned int maxDepth = GetMaxDepth();
-    for (unsigned int i = 1; i <= maxDepth; i++)
-    {
+    for (unsigned int i = 1; i <= maxDepth; i++) {
         PrintOneLevel(leaf, i);
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
-void SortedBinaryTree::PrintByLevel()
-{
+void SortedBinaryTree::PrintByLevel() {
     PrintByLevel(root);
 }
 
-void  SortedBinaryTree::PrintBTree(TreePrintOrder order)
-{
-    switch (order)
-    {
+void SortedBinaryTree::PrintBTree(TreePrintOrder order) {
+    switch (order) {
         case TPInOrder:
-            cout << "Print Binary tree method: InOrder" << endl;
+            std::cout << "Print Binary tree method: InOrder" << std::endl;
             PrintInOrder(root);
-        break;
+            break;
 
         case TPPreOrder:
-            cout << "Print Binary tree method: PreOrder" << endl;
+            std::cout << "Print Binary tree method: PreOrder" << std::endl;
             PrintPreOrder(root);
-        break;
+            break;
 
         case TPPostOrder:
-            cout << "Print Binary tree method: PostOrder" << endl;
+            std::cout << "Print Binary tree method: PostOrder" << std::endl;
             PrintPostOrder(root);
-        break;
+            break;
 
         case TPByLevel:
-            cout << "Print Binary tree method: By Level" << endl;
+            std::cout << "Print Binary tree method: By Level" << std::endl;
             PrintByLevel();
-        break;
+            break;
 
         default:
             // set it as default way to iterate through the tree
             PrintInOrder(root);
     }
 
-    cout << endl << endl;
+    std::cout << std::endl << std::endl;
 }
 
 // overload method in case there is no param provided
-void  SortedBinaryTree::PrintBTree()
-{
+void SortedBinaryTree::PrintBTree() {
     PrintInOrder(root);
-    cout << endl;
+    std::cout << std::endl;
 }
 
-void  SortedBinaryTree::MirrorBTreeHelper(Node *leaf)
-{
-    if (!root || !leaf)
-    {
+void SortedBinaryTree::MirrorBTreeHelper(Node* leaf) {
+    if (!root || !leaf) {
         return;
     }
 
@@ -258,68 +210,55 @@ void  SortedBinaryTree::MirrorBTreeHelper(Node *leaf)
     swap(leaf->_left, leaf->_right);
 }
 
-void  SortedBinaryTree::MirrorBTree()
-{
+void SortedBinaryTree::MirrorBTree() {
     MirrorBTreeHelper(root);
 }
 
-Node* SortedBinaryTree::GetBTreeRoot() const
-{
+Node* SortedBinaryTree::GetBTreeRoot() const {
     return root;
 }
 
-bool SortedBinaryTree::TwinTrees(Node *srcTree, Node *dstTree)
-{
-    if (!srcTree && !dstTree)
-    {
+bool SortedBinaryTree::TwinTrees(Node* srcTree, Node* dstTree) {
+    if (!srcTree && !dstTree) {
         return true;
-    }
-    else if (!srcTree || !dstTree)
-    {
+    } else if (!srcTree || !dstTree) {
         return false;
     }
 
     if ((srcTree->_value == dstTree->_value) &&
         TwinTrees(srcTree->_left, dstTree->_left) &&
-        TwinTrees(srcTree->_right, dstTree->_right))
-    {
+        TwinTrees(srcTree->_right, dstTree->_right)) {
         return true;
     }
 
     return false;
 }
 
-int SortedBinaryTree::MaxDepth(Node *leaf)
-{
+int SortedBinaryTree::MaxDepth(Node* leaf) {
     unsigned int lDepth = 0;
     unsigned int rDepth = 0;
 
-    if (!leaf)
-    {
+    if (!leaf) {
         return 0;
     }
 
-    if (leaf->_left)
-    {
-        lDepth += 1+ MaxDepth(leaf->_left);
+    if (leaf->_left) {
+        lDepth += 1 + MaxDepth(leaf->_left);
     }
 
-    if (leaf->_right)
-    {
-        rDepth += 1+ MaxDepth(leaf->_right);
+    if (leaf->_right) {
+        rDepth += 1 + MaxDepth(leaf->_right);
     }
 
     return (lDepth > rDepth ? lDepth : rDepth);
 }
 
-int SortedBinaryTree::GetMaxDepth()
-{
+int SortedBinaryTree::GetMaxDepth() {
     return MaxDepth(root);
 }
 
-bool IdenticalTrees(SortedBinaryTree &srcTree, SortedBinaryTree &dstTree)
-{
-    Node *srcRoot = srcTree.GetBTreeRoot();
-    Node *dstRoot = dstTree.GetBTreeRoot();
+bool IdenticalTrees(SortedBinaryTree& srcTree, SortedBinaryTree& dstTree) {
+    Node* srcRoot = srcTree.GetBTreeRoot();
+    Node* dstRoot = dstTree.GetBTreeRoot();
     return srcTree.TwinTrees(srcRoot, dstRoot);
 }

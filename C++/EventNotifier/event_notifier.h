@@ -1,16 +1,16 @@
 #ifndef EVENT_NOTIFIER_H
-#define EVENT_NOTIFIER_H 
+#define EVENT_NOTIFIER_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <thread>
-#include <condition_variable>
-#include <utility>
-#include <queue>
 #include <atomic>
 #include <bitset>
+#include <condition_variable>
+#include <iostream>
 #include <mutex>
+#include <queue>
+#include <string>
+#include <thread>
+#include <utility>
+#include <vector>
 #include "observer.h"
 
 class Observer;
@@ -21,17 +21,20 @@ struct Notification {
 };
 
 class EventNotifier {
-public:
+   public:
     EventNotifier();
     ~EventNotifier();
-    void AddObserver(Observer *obs);
-    void RemoveObserver(Observer *obs);
-    void NotifyObservers(std::shared_ptr<Notification>, const std::bitset<32> &receivers);
-    std::shared_ptr<Notification> BuildNotification(const std::string &description);
+    void AddObserver(Observer* obs);
+    void RemoveObserver(Observer* obs);
+    void NotifyObservers(std::shared_ptr<Notification>,
+                         const std::bitset<32>& receivers);
+    std::shared_ptr<Notification> BuildNotification(
+        const std::string& description);
     void NotificationThread();
-    void PushNotificationEvent(const std::string &message, const std::bitset<32> &receivers);
+    void PushNotificationEvent(const std::string& message,
+                               const std::bitset<32>& receivers);
 
-private:
+   private:
     Notification notification_;
     std::vector<Observer*> observers_;
     std::thread ntf_thread_;
@@ -41,4 +44,4 @@ private:
     std::mutex mutex_;
 };
 
-#endif // EVENT_NOTIFIER_H
+#endif  // EVENT_NOTIFIER_H

@@ -6,32 +6,25 @@
  */
 
 #include <iostream>
-#include <vector>
 #include <random>
+#include <vector>
 
-using namespace std;
-
-int BinarySearchNonRecursive(vector<int> data, int needle)
-{
+int BinarySearchNonRecursive(std::vector<int> data, int needle) {
     int low, middle, high;
 
     low = 0;
     high = data.size() - 1;
 
-    while (low <= high)
-    {
+    while (low <= high) {
         middle = (high + low) / 2;
-        if (data[middle] == needle)
-        {
+        if (data[middle] == needle) {
             return middle;
         }
 
-        if (data[middle] < needle)
-        {
+        if (data[middle] < needle) {
             low = middle + 1;
-        }
-        else // (data[middle] > needle)
-        {
+        } else {
+            // (data[middle] > needle)
             high = middle - 1;
         }
     }
@@ -40,58 +33,48 @@ int BinarySearchNonRecursive(vector<int> data, int needle)
     return -1;
 }
 
-int BinarySearchRecursive(vector<int> data, int needle, int low, int high)
-{
+int BinarySearchRecursive(std::vector<int> data, int needle, int low,
+                          int high) {
     int middle = (high + low) / 2;
 
-    if (high < low)
-    {
+    if (high < low) {
         return -1;
     }
 
-    if (data[middle] == needle)
-    {
+    if (data[middle] == needle) {
         return middle;
     }
 
-    if (data[middle] < needle)
-    {
+    if (data[middle] < needle) {
         return BinarySearchRecursive(data, needle, middle + 1, high);
-    }
-    else
-    {
+    } else {
         return BinarySearchRecursive(data, needle, low, middle - 1);
     }
 
     return -1;
 }
 
-void PrintData(vector<int> data)
-{
-    if (data.empty())
-    {
+void PrintData(std::vector<int> data) {
+    if (data.empty()) {
         return;
     }
 
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        if (i  == 0)
-        {
-            cout << "Start idx: 0" << endl;
+    for (unsigned int i = 0; i < data.size(); i++) {
+        if (i == 0) {
+            std::cout << "Start idx: 0" << std::endl;
         }
 
-        cout << data[i] << " ";
-        if ((i != 0) && (i % 20) == 0)
-        {
-            cout << endl;
-            cout << "Start idx: " << i << endl;
+        std::cout << data[i] << " ";
+        if ((i != 0) && (i % 20) == 0) {
+            std::cout << std::endl;
+            std::cout << "Start idx: " << i << std::endl;
         }
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
-unsigned int PickNeedle(unsigned int num, unsigned int ratio, unsigned int first)
-{
+unsigned int PickNeedle(unsigned int num, unsigned int ratio,
+                        unsigned int first) {
     std::random_device rd;
     // Mersenne Twister random number generator
     std::mt19937 generator(rd());
@@ -104,28 +87,26 @@ unsigned int PickNeedle(unsigned int num, unsigned int ratio, unsigned int first
     return (first + (randomIdx - 1) * ratio);
 }
 
-int main()
-{
+int main() {
     unsigned int num, ratio, first;
-    vector<int> data;
+    std::vector<int> data;
     unsigned int i;
     unsigned int needle;
 
-    cout << "Insert the total number of values: ";
-    cin >> num;
+    std::cout << "Insert the total number of values: ";
+    std::cin >> num;
 
-    cout << "Insert the ratio: ";
-    cin >> ratio;
+    std::cout << "Insert the ratio: ";
+    std::cin >> ratio;
 
-    cout << "Insert the first number: ";
-    cin >> first;
+    std::cout << "Insert the first number: ";
+    std::cin >> first;
 
     data.push_back(first);
     // i = 1 <==> first number in the arithmetic progression
     // formula  a_n = a_1 + (n-1) * ratio;
     i = 2;
-    while (i < num)
-    {
+    while (i < num) {
         int a_i = data[0] + (i - 1) * ratio;
         data.push_back(a_i);
         i++;

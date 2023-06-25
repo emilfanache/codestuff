@@ -6,14 +6,12 @@
  */
 
 #include <iostream>
-#include "SingleLinkedList.hpp"
+#include "SingleLinkedList/SingleLinkedList.hpp"
 
-using namespace std;
+int main() {
 
-int main()
-{
-
-    cout << "===== Testing class template with int type =====" << endl << endl;
+    std::cout << "===== Testing class template with int type =====" << std::endl
+              << std::endl;
     SingleLinkedList<int> SlistInt(false);
 
     SlistInt.AddNode(7);
@@ -32,7 +30,8 @@ int main()
     SlistInt.PrintList("After reversing list");
 
     cout << endl << endl;
-    cout << "===== Testing class template with string type =====" << endl << endl;
+    cout << "===== Testing class template with string type =====" << endl
+         << endl;
 
     SingleLinkedList<string> SlistStr(false);
     SlistStr.AddNode("seven");
@@ -45,7 +44,6 @@ int main()
     SlistStr.PrintList("After swapping nodes");
     SlistStr.ReverseList();
     SlistStr.PrintList("After reversing list");
-
 
     return 0;
 }

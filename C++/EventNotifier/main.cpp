@@ -1,14 +1,14 @@
+#include <chrono>
 #include <iostream>
 #include <memory>
-#include <chrono>
 #include <thread>
 
-#include "event_notifier.h"
-#include "observer.h"
-#include "client.h"
+#include "EventNotifier/client.h"
+#include "EventNotifier/event_notifier.h"
+#include "EventNotifier/observer.h"
 
 int main() {
-    const int kWaitMseconds = 200; 
+    const int kWaitMseconds = 200;
     std::shared_ptr<EventNotifier> notifier = std::make_shared<EventNotifier>();
     std::shared_ptr<Observer> observers[Observer::kObserversNum];
 
@@ -24,6 +24,6 @@ int main() {
     // wait for the event notifier to finish
     std::chrono::milliseconds dura(kWaitMseconds);
     std::this_thread::sleep_for(dura);
-    
+
     return 0;
 }

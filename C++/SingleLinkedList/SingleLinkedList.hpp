@@ -10,25 +10,21 @@
 
 #include <string>
 
-using namespace std;
-
 template <typename T>
-struct Node
-{
-    Node*   _next;
-    T       _data;
+struct Node {
+    Node* _next;
+    T _data;
 };
 
 template <class T>
-class SingleLinkedList
-{
-private:
+class SingleLinkedList {
+   private:
     Node<T>* head;
     bool debug;
 
     void SwapNodes(Node<T>** firstNode, Node<T>** secondNode);
 
-public:
+   public:
     SingleLinkedList();
     SingleLinkedList(bool dbg);
     ~SingleLinkedList();
@@ -39,6 +35,5 @@ public:
     void Swap(T first, T second);
     void DeleteNode(T data);
 };
-
 
 #endif /* SINGLELINKEDLIST_HPP_ */

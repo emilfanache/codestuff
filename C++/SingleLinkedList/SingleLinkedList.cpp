@@ -1,82 +1,67 @@
 #include <iostream>
-#include "SingleLinkedList.hpp"
-
-using namespace std;
+#include "SingleLinkedList/SingleLinkedList.hpp"
 
 template <class T>
-SingleLinkedList<T>::SingleLinkedList()
-{
+SingleLinkedList<T>::SingleLinkedList() {
     head = nullptr;
     debug = false;
 }
 
 template <class T>
-SingleLinkedList<T>::SingleLinkedList(bool dbg)
-{
+SingleLinkedList<T>::SingleLinkedList(bool dbg) {
     head = nullptr;
     debug = dbg;
 }
 
 template <class T>
-void SingleLinkedList<T>::AddNode(T data)
-{
-    Node<T> *n = new Node<T>;
+void SingleLinkedList<T>::AddNode(T data) {
+    Node<T>* n = new Node<T>;
     n->_data = data;
     n->_next = nullptr;
 
-    if (!head)
-    {
+    if (!head) {
         head = n;
-    }
-    else
-    {
-        Node<T> *current;
+    } else {
+        Node<T>* current;
 
         // this should take me to the end of the list
-        for (current = head; current->_next != nullptr; current = current->_next);
-        if (debug)
-        {
-            cout << "I'm at: [" << current->_data << "], adding node:"<< n->_data << endl;
+        for (current = head; current->_next != nullptr;
+             current = current->_next)
+            ;
+        if (debug) {
+            std::cout << "I'm at: [" << current->_data
+                      << "], adding node:" << n->_data << std::endl;
         }
         current->_next = n;
-  }
+    }
 
-  return;
+    return;
 }
 
 template <class T>
-void SingleLinkedList<T>::AddNode(T dataToFind, T dataToAdd)
-{
-    if (!head)
-    {
+void SingleLinkedList<T>::AddNode(T dataToFind, T dataToAdd) {
+    if (!head) {
         AddNode(dataToAdd);
-    }
-    else
-    {
-        Node<T> *current = head;
+    } else {
+        Node<T>* current = head;
         bool foundData = false;
 
-        while (current->_next != nullptr)
-        {
-            if (current->_data == dataToFind)
-            {
+        while (current->_next != nullptr) {
+            if (current->_data == dataToFind) {
                 foundData = true;
                 break;
             }
             current = current->_next;
         }
 
-        if (!foundData || !current->_next)
-        {
-            if (debug)
-            {
-                cout << "AddInsideNode fallback: Adding end note" << endl;
+        if (!foundData || !current->_next) {
+            if (debug) {
+                std::cout << "AddInsideNode fallback: Adding end note"
+                          << std::endl;
             }
             AddNode(dataToAdd);
-        }
-        else
-        {
-            Node<T> *n = new Node<T>;
+        } else {
+            Node<T>* n = new Node<T>;
             n->_data = dataToAdd;
             n->_next = current->_next;
             current->_next = n;
@@ -87,29 +72,21 @@ void SingleLinkedList<T>::AddNode(T dataToFind, T dataToAdd)
 }
 
 template <class T>
-void SingleLinkedList<T>::DeleteNode(T data)
-{
-    if (!head)
-    {
+void SingleLinkedList<T>::DeleteNode(T data) {
+    if (!head) {
         return;
-    }
-    else if (head->_data == data)
-    {
-        Node<T> *previous = head;
+    } else if (head->_data == data) {
+        Node<T>* previous = head;
         head = head->_next;
         delete previous;
         return;
-    }
-    else
-    {
-        Node<T> *current = head;
-        Node<T> *previous;
+    } else {
+        Node<T>* current = head;
+        Node<T>* previous;
         bool foundData = false;
 
-        while (current != nullptr)
-        {
-            if (current->_data == data)
-            {
+        while (current != nullptr) {
+            if (current->_data == data) {
                 foundData = true;
                 break;
             }
@@ -117,8 +94,7 @@ void SingleLinkedList<T>::DeleteNode(T data)
             current = current->_next;
         }
 
-        if (foundData)
-        {
+        if (foundData) {
             previous->_next = current->_next;
             delete current;
         }
@@ -128,14 +104,12 @@ void SingleLinkedList<T>::DeleteNode(T data)
 }
 
 template <class T>
-void SingleLinkedList<T>::ReverseList()
-{
-    Node<T> *current = head;
-    Node<T> *previous = nullptr;
-    Node<T> *next = nullptr;
+void SingleLinkedList<T>::ReverseList() {
+    Node<T>* current = head;
+    Node<T>* previous = nullptr;
+    Node<T>* next = nullptr;
 
-    while (current != nullptr)
-    {
+    while (current != nullptr) {
         next = current->_next;
         current->_next = previous;
         previous = current;
@@ -146,32 +120,26 @@ void SingleLinkedList<T>::ReverseList()
 }
 
 template <class T>
-void SingleLinkedList<T>::SwapNodes(Node<T> **firstNode, Node<T> **secondNode)
-{
-    Node<T> *localNode = *firstNode;
+void SingleLinkedList<T>::SwapNodes(Node<T>** firstNode, Node<T>** secondNode) {
+    Node<T>* localNode = *firstNode;
     *firstNode = *secondNode;
     *secondNode = localNode;
 }
 
 template <class T>
-void SingleLinkedList<T>::Swap(T first, T second)
-{
-    Node<T> *current = head;
-    Node<T> *previous = nullptr;
-    Node<T> *firstNode = nullptr;
-    Node<T> *previousFirst = nullptr;
-    Node<T> *secondNode = nullptr;
-    Node<T> *previousSecond = nullptr;
+void SingleLinkedList<T>::Swap(T first, T second) {
+    Node<T>* current = head;
+    Node<T>* previous = nullptr;
+    Node<T>* firstNode = nullptr;
+    Node<T>* previousFirst = nullptr;
+    Node<T>* secondNode = nullptr;
+    Node<T>* previousSecond = nullptr;
 
-    while (current != nullptr)
-    {
-        if (current->_data == first)
-        {
+    while (current != nullptr) {
+        if (current->_data == first) {
             firstNode = current;
             previousFirst = previous;
-        }
-        else if (current->_data == second)
-        {
+        } else if (current->_data == second) {
             secondNode = current;
             previousSecond = previous;
         }
@@ -187,21 +155,15 @@ void SingleLinkedList<T>::Swap(T first, T second)
     if (!firstNode || !secondNode)
         return;
 
-    if (previousFirst != nullptr)
-    {
+    if (previousFirst != nullptr) {
         previousFirst->_next = secondNode;
-    }
-    else
-    {
+    } else {
         head = secondNode;
     }
 
-    if (previousSecond != nullptr)
-    {
+    if (previousSecond != nullptr) {
         previousSecond->_next = firstNode;
-    }
-    else
-    {
+    } else {
         head = firstNode;
     }
 
@@ -209,37 +171,32 @@ void SingleLinkedList<T>::Swap(T first, T second)
 }
 
 template <class T>
-void SingleLinkedList<T>::PrintList(string description)
-{
-    if (!description.empty())
-    {
-        cout << description.c_str() << ":" << endl;
+void SingleLinkedList<T>::PrintList(string description) {
+    if (!description.empty()) {
+        std::cout << description.c_str() << ":" << std::endl;
     }
 
-    for (Node<T> * current = head; current != nullptr; current = current->_next)
-    {
-        cout << "[" << current->_data << "]";
-        if (current->_next != nullptr)
-        {
-            cout << " -> ";
+    for (Node<T>* current = head; current != nullptr;
+         current = current->_next) {
+        std::cout << "[" << current->_data << "]";
+        if (current->_next != nullptr) {
+            std::cout << " -> ";
         }
     }
 
-    cout << endl << endl;
+    std::cout << std::endl << std::endl;
 }
 
 template <class T>
-SingleLinkedList<T>::~SingleLinkedList()
-{
-    Node<T> *next = nullptr;
-    Node<T> *current = head;
+SingleLinkedList<T>::~SingleLinkedList() {
+    Node<T>* next = nullptr;
+    Node<T>* current = head;
 
-    while (current != nullptr)
-    {
+    while (current != nullptr) {
         next = current->_next;
-        if (debug)
-        {
-            cout << "Destroying node with data:" << current->_data << endl;
+        if (debug) {
+            std::cout << "Destroying node with data:" << current->_data
+                      << std::endl;
         }
         delete current;
         current = next;

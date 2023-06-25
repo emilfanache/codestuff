@@ -24,7 +24,6 @@ void ErrorSourceCallString() {
     throw std::string("this is a string error");
 }
 
-
 int main() {
 
     void (*ErrSrcCallPtr)();
@@ -52,14 +51,13 @@ int main() {
             return -1;
     }
 
-
     try {
         ErrSrcCallPtr();
     } catch (int e) {
         std::cout << "Caught an integer error " << e << std::endl;
-    } catch (const char *e) {
+    } catch (const char* e) {
         std::cout << "Caught an error: " << e << std::endl;
-    } catch (std::string &e) {
+    } catch (std::string& e) {
         std::cout << "Caught an error: " << e << std::endl;
     }
 

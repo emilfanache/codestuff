@@ -10,22 +10,18 @@
 
 #include "iostream"
 
-using namespace std;
-
-struct Node
-{
-    Node*   _next;
-    string    _name;
+struct Node {
+    Node* _next;
+    string _name;
 };
 
 const unsigned long numberOfBuckets = 20;
 
-class HashTable
-{
-private:
-    Node *hTable[numberOfBuckets];
+class HashTable {
+   private:
+    Node* hTable[numberOfBuckets];
 
-public:
+   public:
     HashTable();
     ~HashTable();
     unsigned long Hash(string key);
@@ -36,6 +32,5 @@ public:
     void DisplayBucket(unsigned long bucketIdx);
     void DisplayAll();
 };
-
 
 #endif /* HASHTABLE_HPP_ */
