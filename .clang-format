@@ -4,7 +4,7 @@
 
 Language: Cpp
 BasedOnStyle: Google
-AccessModifierOffset: -1
+AccessModifierOffset: -3
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: None
 AlignOperands: Align
@@ -50,6 +50,7 @@ DerivePointerAlignment: false  # Make sure the * or & align on the left
 EmptyLineBeforeAccessModifier: LogicalBlock
 FixNamespaceComments: true
 IncludeBlocks: Preserve
+IndentAccessModifiers: false
 IndentCaseLabels: true
 IndentPPDirectives: None
 IndentWidth: 4

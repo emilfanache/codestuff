@@ -1,5 +1,5 @@
 /*
- * BinarySearch.cpp
+ * binary_search.cpp
  *
  *  Created on: Jun 5, 2021
  *      Author: Emil Fanache
@@ -7,7 +7,8 @@
 
 #include <iostream>
 #include <random>
-#include <vector>
+
+#include "binary_search.hpp"
 
 int BinarySearchNonRecursive(std::vector<int> data, int needle) {
     int low, middle, high;
@@ -33,8 +34,8 @@ int BinarySearchNonRecursive(std::vector<int> data, int needle) {
     return -1;
 }
 
-int BinarySearchRecursive(std::vector<int> data, int needle, int low,
-                          int high) {
+static int BinarySearchRecursive(std::vector<int> data, int needle, int low,
+                                 int high) {
     int middle = (high + low) / 2;
 
     if (high < low) {
@@ -54,7 +55,11 @@ int BinarySearchRecursive(std::vector<int> data, int needle, int low,
     return -1;
 }
 
-void PrintData(std::vector<int> data) {
+int BinarySearchRecursive(std::vector<int> data, int needle) {
+    return BinarySearchRecursive(data, needle, 0, data.size() - 1);
+}
+
+static void PrintData(std::vector<int> data) {
     if (data.empty()) {
         return;
     }
@@ -73,8 +78,8 @@ void PrintData(std::vector<int> data) {
     std::cout << std::endl;
 }
 
-unsigned int PickNeedle(unsigned int num, unsigned int ratio,
-                        unsigned int first) {
+static unsigned int PickNeedle(unsigned int num, unsigned int ratio,
+                               unsigned int first) {
     std::random_device rd;
     // Mersenne Twister random number generator
     std::mt19937 generator(rd());
@@ -87,7 +92,7 @@ unsigned int PickNeedle(unsigned int num, unsigned int ratio,
     return (first + (randomIdx - 1) * ratio);
 }
 
-int main() {
+void TestBinarySearch() {
     unsigned int num, ratio, first;
     std::vector<int> data;
     unsigned int i;
@@ -118,11 +123,9 @@ int main() {
     // print and test data and implementation
     PrintData(data);
 
-    cout << "I picked needle: " << needle << endl;
-    cout << "Index found with binary search non recursively is: ";
-    cout << BinarySearchNonRecursive(data, needle) << endl;
-    cout << "Index found with binary search recursively is: ";
-    cout << BinarySearchRecursive(data, needle, 0, data.size() - 1);
-
-    return 0;
+    std::cout << "I picked needle: " << needle << std::endl;
+    std::cout << "Index found with binary search non recursively is: ";
+    std::cout << BinarySearchNonRecursive(data, needle) << std::endl;
+    std::cout << "Index found with binary search recursively is: ";
+    std::cout << BinarySearchRecursive(data, needle) << std::endl;
 }
