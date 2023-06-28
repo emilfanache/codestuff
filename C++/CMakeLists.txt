@@ -20,16 +20,20 @@ FetchContent_GetProperties(googletest)
 include_directories("${CMAKE_SOURCE_DIR}/BinarySearch"
                     "${CMAKE_SOURCE_DIR}/NextGreat"
                     "${CMAKE_SOURCE_DIR}/StringsFun"
-                    "${CMAKE_SOURCE_DIR}/HashTable")
+                    "${CMAKE_SOURCE_DIR}/HashTable"
+                    "${CMAKE_SOURCE_DIR}/SingleLinkedList")
+
 file(GLOB SOURCES "${CMAKE_SOURCE_DIR}/BinarySearch/binary_search.cpp"
                   "${CMAKE_SOURCE_DIR}/NextGreat/next_great.cpp"
                   "${CMAKE_SOURCE_DIR}/StringsFun/strings_fun.cpp"
-                  "${CMAKE_SOURCE_DIR}/HashTable/hash_table.cpp")
+                  "${CMAKE_SOURCE_DIR}/HashTable/hash_table.cpp"
+                  "${CMAKE_SOURCE_DIR}/SingleLinkedList/single_linked_list.cpp")
 
 file(GLOB TEST_SOURCES "${CMAKE_SOURCE_DIR}/BinarySearch/test/binary_search_test.cpp"
                        "${CMAKE_SOURCE_DIR}/NextGreat/test/next_great_test.cpp"
                        "${CMAKE_SOURCE_DIR}/StringsFun/test/strings_fun_test.cpp"
-                       "${CMAKE_SOURCE_DIR}/HashTable/test/hash_table_test.cpp")
+                       "${CMAKE_SOURCE_DIR}/HashTable/test/hash_table_test.cpp"
+                       "${CMAKE_SOURCE_DIR}/SingleLinkedList/test/single_linked_list_test.cpp")
 
 
 add_library(main_lib STATIC ${SOURCES})
