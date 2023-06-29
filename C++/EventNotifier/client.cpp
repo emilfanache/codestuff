@@ -26,8 +26,8 @@ void Client::GenerateObserversMask() {
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(0, Observer::kObserversNum - 1);
 
-    // being a small subset, the same random value will be generated multiple times
-    // giving a different subset for each execution
+    // being a small subset, the same random value will be generated multiple
+    // times giving a different subset for each execution
     for (uint8_t idx = 0; idx < Observer::kObserversNum; idx++) {
         observer_mask_.set(dist(mt));
     }

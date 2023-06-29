@@ -1,8 +1,9 @@
 #include <algorithm>
 #include <limits>
+#include <memory>
 #include <random>
 
-#include "EventNotifier/event_notifier.h"
+#include "event_notifier.h"
 
 EventNotifier::EventNotifier() {
     ntf_thread_ = std::thread(&EventNotifier::NotificationThread, this);

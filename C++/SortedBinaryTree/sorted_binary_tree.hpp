@@ -1,12 +1,12 @@
 /*
- *  SortedBinaryTree.hpp
+ *  sorted_binary_tree.hpp
  *
  *  Created on: Mar. 21, 2021
  *      Author: Emil Fanache
  */
 
-#ifndef SORTEDBINARYTREE_HPP_
-#define SORTEDBINARYTREE_HPP_
+#ifndef SORTED_BINARY_TREE_HPP_
+#define SORTED_BINARY_TREE_HPP_
 
 enum TreePrintOrder { TPInOrder, TPPreOrder, TPPostOrder, TPByLevel };
 
@@ -17,7 +17,7 @@ struct Node {
 };
 
 class SortedBinaryTree {
-   private:
+ private:
     Node* root;
 
     Node* CreateNode(int value);
@@ -34,7 +34,7 @@ class SortedBinaryTree {
     void PrintByLevel(Node* leaf);
     void PrintOneLevel(Node* leaf, int level);
 
-   public:
+ public:
     SortedBinaryTree();
     SortedBinaryTree(const SortedBinaryTree& dstTree);
     ~SortedBinaryTree();
@@ -45,7 +45,8 @@ class SortedBinaryTree {
     void MirrorBTree();
     int GetMaxDepth();
     void PrintByLevel();
-    friend bool IdenticalTrees(SortedBinaryTree&, SortedBinaryTree&);
+    friend bool IdenticalTrees(const SortedBinaryTree&,
+                               const SortedBinaryTree&);
 };
 
-#endif /* SORTEDBINARYTREE_HPP_ */
+#endif  // SORTED_BINARY_TREE_HPP_

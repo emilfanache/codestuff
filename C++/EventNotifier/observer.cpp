@@ -1,4 +1,4 @@
-#include "EventNotifier/observer.h"
+#include "observer.h"
 
 void Observer::SubscribeToNotification() {
     ev_ntf_->AddObserver(this);

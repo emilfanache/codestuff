@@ -6,8 +6,9 @@
  */
 
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <iostream>
 
 char* buffer = NULL;
 const int BUFFER_SIZE = 100;
@@ -26,28 +27,28 @@ void buildBufferData(char** buffer) {
         (*buffer)[i] = start + (i % LETTERS_IN_ALPHABET);
     }
 
-    std::cout << "Buffer data has been written!" << std::endl;
+    printf("Buffer data has been written!\n");
 }
 
 void* theOneHandler(void* arg) {
     int argId = *((int*)arg);
 
-    std::cout << "theOne started -> tid = " << argId << std::endl;
+    printf("theOne started -> tid = %d\n", argId);
 
     pthread_mutex_lock(&m_lock);
 
     pthread_cond_wait(&bufferHasData, &m_lock);
-    std::cout << "Buffer content is: " << buffer << std::endl;
+    printf("Buffer content is: %s\n", buffer);
 
     pthread_mutex_unlock(&m_lock);
 
-    std::cout << "theOne ended" << std::endl;
+    printf("theOne ended\n");
     pthread_exit(NULL);
 }
 
 void* theOtherHandler(void* arg) {
     int argId = *((int*)arg);
-    std::cout << "theOther started -> tid = " << argId << std::endl;
+    printf("theOther started -> tid = %d\n", argId);
 
     pthread_mutex_lock(&m_lock);
 
@@ -56,7 +57,7 @@ void* theOtherHandler(void* arg) {
 
     pthread_mutex_unlock(&m_lock);
 
-    std::cout << "theOther ended" << std::endl;
+    printf("theOther ended\n");
     pthread_exit(NULL);
 }
 
@@ -68,9 +69,9 @@ int main() {
     int theOtherId = 5678;
     pthread_attr_t attr;
 
-    buffer = new char(BUFFER_SIZE);
+    buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
     if (!buffer) {
-        cout << "Memory allocation error at line " << __LINE__ << endl;
+        printf("Memory allocation error at line %d\n", __LINE__);
         exit(-1);
     }
 
@@ -80,9 +81,8 @@ int main() {
 
     status = pthread_create(&theOne, NULL, theOneHandler, (void*)&theOneId);
     if (status > 0) {
-        delete[] buffer;
-        std::cout << "Error " << status << "on creating thread: theOne"
-                  << status << std::endl;
+        free(buffer);
+        printf("Error %d on creating thread: theOne\n", status);
         exit(-1);
     }
 
@@ -92,9 +92,8 @@ int main() {
     status =
         pthread_create(&theOther, NULL, theOtherHandler, (void*)&theOtherId);
     if (status > 0) {
-        delete[] buffer;
-        std::cout << "Error " << status << "on creating thread: theOther"
-                  << status << std::endl;
+        free(buffer);
+        printf("Error %d on creating thread: theOther\n", status);
         exit(-1);
     }
 
@@ -102,25 +101,23 @@ int main() {
 
     status = pthread_join(theOne, NULL);
     if (status != 0) {
-        delete[] buffer;
-        std::cout << "Error " << status << "on joining thread: theOne" << status
-                  << std::endl;
+        free(buffer);
+        printf("Error %d on joining thread: theOne\n", status);
         exit(-1);
     }
 
     status = pthread_join(theOther, NULL);
     if (status != 0) {
-        delete[] buffer;
-        std::cout << "Error " << status << "on joining thread: theOther"
-                  << status << std::endl;
+        free(buffer);
+        printf("Error %d on joining thread: theOther\n", status);
         exit(-1);
     }
 
-    std::cout << "Done!" << std::endl;
+    printf("Done!\n");
 
     // terminate current thread but keep all the other going
     pthread_exit(NULL);
-    delete[] buffer;
 
+    free(buffer);
     return 0;
 }

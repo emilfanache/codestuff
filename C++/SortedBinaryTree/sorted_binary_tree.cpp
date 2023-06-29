@@ -1,13 +1,14 @@
 /*
- *  SortedBinaryTree.cpp
+ *  sorted_binary_tree.cpp
  *
  *  Created on: Mar. 21, 2021
  *      Author: Emil Fanache
  */
 #include <algorithm>
 #include <iostream>
+#include <utility>
 
-#include "SortedBinaryTree/SortedBinaryTree.hpp"
+#include "sorted_binary_tree.hpp"
 
 SortedBinaryTree::SortedBinaryTree() {
     root = nullptr;
@@ -141,7 +142,7 @@ void SortedBinaryTree::PrintOneLevel(Node* leaf, int level) {
     }
 
     if (level == 1) {
-        std::scout << leaf->_value << " ";
+        std::cout << leaf->_value << " ";
     } else {
         PrintOneLevel(leaf->_left, level - 1);
         PrintOneLevel(leaf->_right, level - 1);
@@ -207,7 +208,7 @@ void SortedBinaryTree::MirrorBTreeHelper(Node* leaf) {
 
     MirrorBTreeHelper(leaf->_left);
     MirrorBTreeHelper(leaf->_right);
-    swap(leaf->_left, leaf->_right);
+    std::swap(leaf->_left, leaf->_right);
 }
 
 void SortedBinaryTree::MirrorBTree() {
@@ -257,7 +258,8 @@ int SortedBinaryTree::GetMaxDepth() {
     return MaxDepth(root);
 }
 
-bool IdenticalTrees(SortedBinaryTree& srcTree, SortedBinaryTree& dstTree) {
+bool IdenticalTrees(const SortedBinaryTree& srcTree,
+                    const SortedBinaryTree& dstTree) {
     Node* srcRoot = srcTree.GetBTreeRoot();
     Node* dstRoot = dstTree.GetBTreeRoot();
     return srcTree.TwinTrees(srcRoot, dstRoot);

@@ -3,9 +3,9 @@
 #include <memory>
 #include <thread>
 
-#include "EventNotifier/client.h"
-#include "EventNotifier/event_notifier.h"
-#include "EventNotifier/observer.h"
+#include "client.h"
+#include "event_notifier.h"
+#include "observer.h"
 
 int main() {
     const int kWaitMseconds = 200;

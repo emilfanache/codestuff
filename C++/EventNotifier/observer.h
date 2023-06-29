@@ -9,7 +9,7 @@ class EventNotifier;
 struct Notification;
 
 class Observer {
-   public:
+ public:
     static constexpr uint8_t kObserversNum = 10;
     Observer(uint8_t id, EventNotifier* ev_ntf) : id_(id), ev_ntf_(ev_ntf) {}
 
@@ -20,7 +20,7 @@ class Observer {
     void PrintInfo();
     uint32_t GetId();
 
-   private:
+ private:
     std::string info_;
     uint32_t id_;
     EventNotifier* ev_ntf_;

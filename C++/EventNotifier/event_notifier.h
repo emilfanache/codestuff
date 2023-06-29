@@ -5,12 +5,14 @@
 #include <bitset>
 #include <condition_variable>
 #include <iostream>
+#include <memory>
 #include <mutex>
 #include <queue>
 #include <string>
 #include <thread>
 #include <utility>
 #include <vector>
+
 #include "observer.h"
 
 class Observer;
@@ -21,7 +23,7 @@ struct Notification {
 };
 
 class EventNotifier {
-   public:
+ public:
     EventNotifier();
     ~EventNotifier();
     void AddObserver(Observer* obs);
@@ -34,7 +36,7 @@ class EventNotifier {
     void PushNotificationEvent(const std::string& message,
                                const std::bitset<32>& receivers);
 
-   private:
+ private:
     Notification notification_;
     std::vector<Observer*> observers_;
     std::thread ntf_thread_;

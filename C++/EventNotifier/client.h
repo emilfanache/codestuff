@@ -11,12 +11,12 @@
 class EventNotifier;
 
 class Client {
-   public:
+ public:
     explicit Client(EventNotifier* ev_ntf);
     ~Client() = default;
     void SignalNotifiyer();
 
-   private:
+ private:
     void GenerateString();
     void GenerateObserversMask();
 
