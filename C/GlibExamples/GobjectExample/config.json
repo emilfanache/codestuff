@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "debug": "on",
+    "user_set": {
+      "summary": "Some user description",
+      "component": "main_window",
+      "key": "value"
+    },
+    "app_set": {
+      "summary": "Some app description",
+      "component": "other_windows",
+      "specific": "none"
+    }
+  }
+}
